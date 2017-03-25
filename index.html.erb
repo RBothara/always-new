@@ -1,0 +1,302 @@
+
+<!doctype html>
+
+
+<html lang="en">
+    <head>
+
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="content-language" content="cs" />
+    <meta name="author" lang="cs" content="David Kohout; http://www.davidkohout.cz" />
+    <meta name="copyright" lang="cs" content="David Kohout; http://www.davidkohout.cz" />
+    <meta name="description" content="..." />
+    <meta name="keywords" content="..." />
+    <meta name="robots" content="all,follow" />
+    <link href="css/screen.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+
+        <title>eshopmarkets</title>
+
+        <!-- Page styles -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="../css/material.min.css">
+        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="stylesheet" href="../css/tidy.css">
+        <link rel="stylesheet" href="../css/animate.css">
+        <link rel="stylesheet" href="../css/mui.min.css" />
+        <script src="../scripts/mui.min.js"></script>
+        <script>
+            function create_contact_feild(id, count) {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                        switch (id) {
+                            case 1:
+                                document.getElementById("contact_feild_creation").innerHTML = xmlhttp.responseText;
+
+                                break;
+                            case 2:
+                                document.getElementById("service_feild_creation").innerHTML = xmlhttp.responseText;
+
+                                break;
+                            case 3:
+                                document.getElementById("subcategory_feild_creation").innerHTML = xmlhttp.responseText;
+
+                                break;
+                            default :
+                                break;
+
+                        }
+
+                    }
+                }
+                xmlhttp.open("GET", "contact_feild_create.php?q=" + count + "&id=" + id, true);
+                xmlhttp.send();
+            }
+
+        </script>
+        <style>
+            #view-source {
+                position: fixed;
+                display: block;
+                right: 0;
+                bottom: 0;
+                margin-right: 40px;
+                margin-bottom: 40px;
+                z-index: 900;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+            <div class="android-header mdl-layout__header mdl-layout__header--waterfall">
+                <div class="mdl-layout__header-row">
+                    <span class="android-title mdl-layout-title">
+                       
+
+                    </span>
+                    <!-- Add spacer, to align navigation to the right in desktop -->
+                    <div class="android-header-spacer mdl-layout-spacer"></div>
+                    <div class="android-search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
+                        <label class="mdl-button mdl-js-button mdl-button--icon" for="search-field">
+                            <i class="material-icons">search</i>
+                        </label>
+                        <div class="mdl-textfield__expandable-holder">
+                            <input class="mdl-textfield__input" type="text" id="search-field" />
+                        </div>
+                    </div>
+                    <!-- Navigation -->
+                    <div class="android-navigation-container">
+                        <nav class="android-navigation mdl-navigation">
+                            <a class="mdl-navigation__link mdl-typography--text-uppercase" href="about.php">About</a>
+                            <a class="mdl-navigation__link mdl-typography--text-uppercase" href="about.php#contact-us">Contact</a>
+
+
+                        </nav>
+                    </div>
+                    <button class="android-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
+                        <i class="material-icons">more_vert</i>
+                    </button>
+                    <!--ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
+                       <li class="mdl-menu__item">Login</li>
+                       <li class="mdl-menu__item">Signup</li>
+                     </ul-->
+                    <span class="android-mobile-title mdl-layout-title">
+
+                        
+                    </span>
+                </div>
+            </div>
+
+            <div class="android-drawer mdl-layout__drawer">
+                <span class="mdl-layout-title">
+                  
+                </span>
+                <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link" href="about.html">About</a>
+                    <a class="mdl-navigation__link" href="about.html#contact-us">Contact</a>
+
+
+                    <div class="android-drawer-separator"></div>
+                    <span class="mdl-navigation__link" href="#">Categories</span>
+
+                    <?php
+                    global $DB;
+                    $cat = $DB->result_for_query("select * from category");
+                    foreach ($cat as $c) {
+                        echo"
+                            <a class='mdl-navigation__link' href='shop_list.php?id=$c[1]'>
+                               $c[1]
+                            </a>
+                         ";
+                    }
+                    ?>
+                    <div class="android-drawer-separator"></div>
+                    <span class="mdl-navigation__link" href="#"> Social Media</span>
+                    <a class="mdl-navigation__link" href="#">Facebook</a>
+                    <a class="mdl-navigation__link" href="#"> Google+</a>
+                    <a class="mdl-navigation__link" href="#">Twitter</a>
+                    <div class="android-drawer-separator"></div>
+
+
+                </nav>
+            </div>
+
+
+            <div class="android-content mdl-layout__content">
+
+
+
+
+                <div class="container" style="width: 100%">
+                    COVER IMAGE AND FLOATING BUTTON
+                    <div style ="background-image: url(../images/front.jpg); background-size: cover; background-position: center;
+                         height: 50%;width: 100%;top: 0;position: absolute;"></div>
+                    <div style="height: 50%; width: 100%; position: absolute; top: 0">
+                        <!-- REPLACE WITH YOUR APP URL -->
+                        <a href="YOUR_APP_URL_HERE">
+                            <paper-fab class="wow fadeInUp desktop-fab" icon="shop"></paper-fab>
+                        </a>
+                    </div>      
+                    <br>      <br>        <br>        <br><br>
+
+                    <div class="wow fadeInUp content-card" style="margin-top: 0;">
+                        <span class="text-subtitle" id="contact-us">Admin Login</span>
+                        <br><br><br>
+                        <div>
+                    <%= form_for :posts do |f| %>
+                                <div class="mui-textfield" label="Shop name" floating>
+    <%= f.text_field :eventcount , :placeholder=>"Enter count of event " %>
+    </div>
+  <p>
+    <%= f.submit %>
+  </p>
+
+
+ </div>
+                    </div>
+                      <div class="mui-dropdown">
+                        <div class="field">
+    
+                            <%= f.label :event %><br>
+                            <%= f.select :Events,:prompt => 'Select One'%>
+                                         <button class="mui-btn mui-btn--primary" data-mui-toggle="dropdown">
+                                         Events
+                                        <span class="mui-caret"></span>
+                                    
+                                
+                                    </ul>
+                                </div>
+<% end %>
+
+               
+                    <div class="empty-space">
+                        <div class="meta-container">
+                            <div class="wow fadeInUp detail-item watermark">
+                                <core-icon class="details-icon" icon="polymer"></core-icon>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <footer class="android-footer mdl-mega-footer">
+                        <div class="mdl-mega-footer--top-section">
+                            <div class="mdl-mega-footer--left-section">
+                                <a href=""> <img src="../img/fb.jpg" style="height: 5%;width: 5%;" ></a>
+                                &nbsp;
+                                <a href=""> <img src="../img/twitter.png" style="height: 5%;width: 5%;" ></a>
+                                &nbsp;
+                                <a href=""> <img src="../img/gplus.png" style="height: 5%;width: 5%;" ></a>
+                            </div>
+                            <div class="mdl-mega-footer--right-section">
+                                <a href="#top-page" class="mdl-typography--font-light"  >
+                                    Back to Top
+                                    <i class="material-icons">expand_less</i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="mdl-mega-footer--middle-section">
+                            <p class="mdl-typography--font-light">Website is still under development.*</p>
+                        </div>
+
+                        <!--div class="mdl-mega-footer--bottom-section">
+                        <!--a class="android-link android-link-menu mdl-typography--font-light" id="version-dropdown">
+                          Versions
+                          <i class="material-icons">arrow_drop_up</i>
+                        </a>
+                        <ul class="mdl-menu mdl-js-menu mdl-menu--top-left mdl-js-ripple-effect" for="version-dropdown">
+                          <li class="mdl-menu__item">About</li>
+                          <li class="mdl-menu__item">Contact</li>
+            
+                        </ul>
+                        <a class="android-link android-link-menu mdl-typography--font-light" id="developers-dropdown">
+                          For Developers
+                          <i class="material-icons">arrow_drop_up</i>
+                        </a>
+                         <ul class="mdl-menu mdl-js-menu mdl-menu--top-left mdl-js-ripple-effect" for="developers-dropdown">
+                          <li class="mdl-menu__item">Facebook</li>
+                          <li class="mdl-menu__item">Google +</li>
+                          <li class="mdl-menu__item">Twitter</li>
+            
+                        </ul>
+                        <a class="android-link mdl-typography--font-light" href="">Blog</a>
+                        <a class="android-link mdl-typography--font-light" href="">Privacy Policy</a>
+                      </div-->
+
+                    </footer>
+                </div>
+            </div>
+
+            <script src="../scripts/material.min.js"></script>
+            <script src="js/wow.min.js"></script>
+            <script>
+                                new WOW().init();
+            </script>
+
+            <!-- Scrollwheel Smoothing -->
+            <script>
+                $(function ()
+                {
+                    var $window = $(window);
+                    var scrollTime = 0.5;
+                    var scrollDistance = 270;
+                    $window.on("mousewheel DOMMouseScroll", function (event)
+                    {
+
+                        event.preventDefault();
+                        var delta = event.originalEvent.wheelDelta / 120 || -event.originalEvent.detail / 3;
+                        var scrollTop = $window.scrollTop();
+                        var finalScroll = scrollTop - parseInt(delta * scrollDistance);
+                        TweenMax.to($window, scrollTime,
+                                {
+                                    scrollTo: {y: finalScroll, autoKill: true}, ease: Power1.easeOut, overwrite: 5
+
+                                });
+                    });
+                });
+            </script>
+
+  
+
+<%= javascript_tag do%>
+$(document).ready(function(){
+  $('[name="posts_eventcount"]').change(function(){
+  console.log((this).val());
+   a=$(this).val();
+  
+   for(i=0;i<a;i++){
+   var o = new Option(i,i)
+   $('[name="posts[Events]"]').append(o);
+ }
+
+
+});
+});
+
+<%end%>
+  </body>
+</html>
